@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>JavaScript colorChanger()</title>
+    <style>
+        @keyframes rotateDown {
+            to{transform: rotateX(180deg);}
+        }
+        @keyframes rotateUp {
+            to{transform: rotateX(-180deg);}
+        }
+        @keyframes pulsing{
+            to{transform: scale(110%);}
+        }
+
+        body {
+            margin: 0;
+            height: 500px;
+            font-family: 'Alexander Display', sans-serif;
+            background-color: rgb(28, 1, 37);
+        }
+
+        .container {
+            color: white;
+            background-color: rgb(30, 0, 139);
+            margin: 70px auto;
+            width: 65%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+            padding: 10px;
+        }
+
+        #colorBox {
+            width: 200px;
+            height: 290px;
+            background-color: green;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            transition: background-color 3s ease;
+        }
+
+
+        #text {
+            font-size: 35px;
+        }
+
+        button {
+            background-color: #1c1c1c;
+            color: white;
+            padding: 15px 30px;
+            margin: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: transform 1s ease, background-color 1s ease;
+            
+        }
+        #textContainer{
+            display: flex;
+            justify-content: space-evenly;
+            text-shadow: 2px 2px black;
+        }
+        button:hover {
+            background-color: #4e41ff;
+            transform: scale(1.2, 1.2);
+        }
+        h3 {
+            font-size: 20px;
+            text-shadow: 2px 2px black;
+        }
+        button#dayNight {
+            padding: 0px;
+            height: 79px;
+            width: 63px;
+            border-radius: 100px;
+            font-size: 20px;
+        }
+        #highlight {
+            animation: pulsing 2s infinite alternate;
+            color: #d34afd;
+            font-size: 35px;
+            padding: 0px 20px;
+        }
+
+       
+</style>
+</head>
+<body>
+    <div class="container">
+        <div id="textContainer">
+            <h1 id="text">JavaScript</h1>
+            <h1 id="highlight">colorChanger()</h1>
+            <h1 id="text">Hands-On</h1>
+        </div>
+        <div id="colorBox"></div>
+        <button id="changeColorBtn">Change Color</button>
+        <h3 id="mode">It is Currently in Night mode</h3> 
+        <button id="dayNight"><i class="fa fa-moon-o"></i></button>
+    </div>
+
+    <script>
+        var colorBox = document.getElementById("colorBox");
+        var changeColorBtn = document.getElementById("changeColorBtn");
+        var dayNightBtn = document.getElementById("dayNight");
+        var container = document.querySelector(".container");
+        var modeText = document.getElementById("mode");
+        var highlight = document.getElementById("highlight");
+        var body = document.body;
+        var text = document.getElementById("textContainer");
+        
+
+        changeColorBtn.addEventListener("click", changeColor);
+        dayNightBtn.addEventListener("click", changeMode); 
+
+        function changeColor() {
+            if (colorBox.style.backgroundColor === "blue") {
+                colorBox.style.backgroundColor = "green";
+                colorBox.style.animation = "rotateUp 2s";
+            } else {
+                colorBox.style.backgroundColor = "blue";
+                colorBox.style.animation = "rotateDown 2s";
+            }
+        }
+        function changeMode() {
+            var iconElement = dayNightBtn.querySelector('i');
+
+            if (iconElement.classList.contains('fa-moon-o')) {
+                iconElement.classList.replace('fa-moon-o', 'fa-sun-o');
+                modeText.innerHTML = "It is Now in Day mode.";
+                body.style.backgroundColor = "rgb(171, 245, 239)";
+                container.style.backgroundColor = "rgb(155, 127, 255)";
+                container.style.color = "black";
+                modeText.style.textShadow = "1px 1px white";
+                text.style.textShadow = "1px 1px white";
+                colorBox.style.border = "2px solid black";
+                highlight.style.color = "#0400ff";
+                
+            } else {
+                iconElement.classList.replace('fa-sun-o', 'fa-moon-o');
+                modeText.innerHTML = "It is Now in Night mode.";
+                body.style.backgroundColor = '';
+                container.style.backgroundColor = '';
+                container.style.color = '';
+                modeText.style.textShadow = '';
+                colorBox.style.border = '';
+                highlight.style.color = '';
+            }
+        }
+    </script>
+</body>
+</html>
